@@ -14,6 +14,6 @@ export default defineConfig({
         react(),
     ],
     build: {
-        output: 'dist'
+        dist: 'dist'
     }
 });
