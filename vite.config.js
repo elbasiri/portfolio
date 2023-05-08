@@ -14,6 +14,6 @@ export default defineConfig({
         react(),
     ],
     build: {
-        outDir: 'public'
+        outDir: 'public/index.php'
     }
 });
