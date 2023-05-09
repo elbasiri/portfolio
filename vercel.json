@@ -3,7 +3,7 @@
      "version": 2,
      "builds": [
          {
-             "src": "public/index.php",
+             "src": "public/index.php"
          }
      ],
      "routes": [
