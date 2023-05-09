@@ -1,18 +1,49 @@
-
 {
      "version": 2,
+     "env": {
+       "POSTGRES_URL": "postgres://default:CHwQ7em6yDEF@ep-odd-pond-864389-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb",
+       "POSTGRES_PRISMA_URL": "postgres://default:CHwQ7em6yDEF@ep-odd-pond-864389-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb?pgbouncer=true&connect_timeout=15",
+       "POSTGRES_URL_NON_POOLING": "postgres://default:CHwQ7em6yDEF@ep-odd-pond-864389.us-east-1.postgres.vercel-storage.com:5432/verceldb",
+       "POSTGRES_USER": "default",
+       "POSTGRES_HOST": "ep-odd-pond-864389-pooler.us-east-1.postgres.vercel-storage.com",
+       "POSTGRES_PASSWORD": "CHwQ7em6yDEF",
+       "POSTGRES_DATABASE": "verceldb"
+     },
      "builds": [
-         {
-             "src": "public/index.php"
-         }
+       { "src": "*.js", "use": "@now/node" },
+       { "src": "package.json", "use": "@now/static-build", "config": { "cmd": "npm run build" } }
      ],
      "routes": [
-         {
-             "src": "public/index.php"
-         },
-         {
-             "src": "/(.*)",
-             "dest": "public/$1"
-         }
+       { "src": "/(.*)", "dest": "/index.html" },
+       { "src": "/static/(.*)", "dest": "/static/$1" }
+     ],
+     "routes": [
+       { "src": "/api/(.*)", "dest": "/api.js" }
+     ],
+     "routes": [
+       { "src": "/(.*)", "dest": "/index.html" }
+     ],
+     "redirects": [
+       { "source": "/(.*)", "destination": "/index.html" }
+     ],
+     "rewrites": [
+       { "source": "^/(.*)", "destination": "/index.html" }
+     ],
+     "headers": [
+       { "source": "/(.*)", "headers": [ { "key": "X-Frame-Options", "value": "SAMEORIGIN" }] }
+     ],
+     "trailingSlash": true,
+     "cleanUrls": true,
+     "cleanUrlsWhitelist": [
+       "/"
+     ],
+     "redirects": [
+       { "source": "/api/v1/(.*)", "destination": "/api/v1/$1" }
+     ],
+     "rewrites": [
+       { "source": "/api/v2/(.*)", "destination": "/api/v2/$1" }
+     ],
+     "builds": [
+       { "src": "package.json", "use": "@now/static-build", "config": { "cmd": "npm run start" } }
      ]
- }
+   }
