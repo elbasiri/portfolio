@@ -1,0 +1,20 @@
+
+{
+     "version": 2,
+     "builds": [
+         {
+             "src": "public/index.php",
+             "use": "@vercel/laravel"
+         }
+     ],
+     "routes": [
+         {
+             "handle": "filesystem",
+             "src": "public/index.php"
+         },
+         {
+             "src": "/(.*)",
+             "dest": "public/$1"
+         }
+     ]
+ }
