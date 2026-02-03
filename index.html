@@ -115,6 +115,83 @@
             backdrop-filter: blur(12px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
+
+        /* Hero gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 50%, #5eead4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Floating animation for hero shapes */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes float-delayed {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(-5deg);
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.05);
+            }
+        }
+
+        .float-shape {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-shape-delayed {
+            animation: float-delayed 8s ease-in-out infinite;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Grid pattern for hero */
+        .hero-grid {
+            background-image:
+                linear-gradient(rgba(20, 184, 166, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 184, 166, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Social icon hover */
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #14b8a6;
+        }
     </style>
 </head>
 
@@ -169,34 +246,141 @@
          HERO SECTION
     ═══════════════════════════════════════════════════════════════ -->
     <section id="hero" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
-        <!-- Background elements -->
-        <div class="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-900 to-navy-900"></div>
-        <div class="absolute top-20 right-10 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl"></div>
+        <!-- Background layers -->
+        <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800"></div>
+        <div class="absolute inset-0 hero-grid"></div>
+
+        <!-- Animated floating shapes -->
+        <div class="absolute top-20 right-[10%] w-72 h-72 bg-accent-500/10 rounded-full blur-3xl pulse-glow"></div>
+        <div class="absolute bottom-20 left-[5%] w-96 h-96 bg-accent-500/5 rounded-full blur-3xl pulse-glow"
+            style="animation-delay: 2s;"></div>
+        <div
+            class="absolute top-[30%] right-[20%] w-20 h-20 border border-accent-500/20 rounded-2xl float-shape hidden lg:block">
+        </div>
+        <div
+            class="absolute top-[60%] right-[15%] w-12 h-12 bg-accent-500/10 rounded-xl float-shape-delayed hidden lg:block">
+        </div>
+        <div
+            class="absolute top-[20%] left-[15%] w-16 h-16 border border-accent-500/10 rounded-full float-shape-delayed hidden lg:block">
+        </div>
+        <div class="absolute bottom-[30%] right-[8%] w-8 h-8 bg-accent-500/20 rounded-lg float-shape hidden lg:block">
+        </div>
+
+        <!-- Decorative line -->
+        <div
+            class="absolute left-0 top-1/2 -translate-y-1/2 w-24 h-px bg-gradient-to-r from-transparent via-accent-500/30 to-transparent hidden lg:block">
+        </div>
 
         <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left content -->
                 <div class="fade-up">
-                    <p class="text-accent-500 font-semibold tracking-wide mb-4">Laravel Backend Specialist</p>
+                    <!-- Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 bg-accent-500/10 border border-accent-500/20 rounded-full px-4 py-2 mb-6">
+                        <span class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
+                        <span class="text-accent-400 text-sm font-medium">Available for new projects</span>
+                    </div>
+
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                        I Build Backend Systems That <span class="text-accent-400">Power Your Business</span>
+                        I Build Backend Systems That
+                        <span class="gradient-text">Power Your Business</span>
                     </h1>
-                    <p class="text-lg sm:text-xl text-slate-400 mb-10 leading-relaxed">
+
+                    <p class="text-lg sm:text-xl text-slate-400 mb-8 leading-relaxed max-w-xl">
                         Scalable SaaS platforms, robust APIs, and complex business logic — built with Laravel for
                         startups and growing companies who need reliability.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
+
+                    <!-- CTA buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
                         <a href="#contact"
-                            class="btn-primary bg-accent-500 hover:bg-accent-600 text-navy-900 font-semibold px-8 py-4 rounded-lg text-lg text-center">
-                            Contact Me
+                            class="btn-primary bg-accent-500 hover:bg-accent-600 text-navy-900 font-semibold px-8 py-4 rounded-xl text-lg text-center flex items-center justify-center gap-2">
+                            <span>Contact Me</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
                         </a>
                         <a href="#projects"
-                            class="btn-secondary border-2 border-slate-600 hover:border-slate-500 text-white font-semibold px-8 py-4 rounded-lg text-lg text-center">
+                            class="btn-secondary border-2 border-slate-600 hover:border-accent-500/50 text-white font-semibold px-8 py-4 rounded-xl text-lg text-center">
                             View Projects
                         </a>
                     </div>
+
+                    <!-- Social proof / stats -->
+                    <div class="flex flex-wrap gap-8 pt-6 border-t border-slate-700/50">
+                        <div>
+                            <div class="text-2xl font-bold text-white">3+</div>
+                            <div class="text-sm text-slate-500">Years Experience</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">10+</div>
+                            <div class="text-sm text-slate-500">Projects Delivered</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">100%</div>
+                            <div class="text-sm text-slate-500">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right side - Code illustration -->
+                <div class="hidden lg:block fade-up">
+                    <div class="relative">
+                        <!-- Code window -->
+                        <div class="bg-navy-950 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
+                            <!-- Window header -->
+                            <div class="flex items-center gap-2 px-4 py-3 bg-navy-900 border-b border-slate-700/50">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                <span class="ml-3 text-xs text-slate-500">UserController.php</span>
+                            </div>
+                            <!-- Code content -->
+                            <div class="p-6 font-mono text-sm">
+                                <div class="text-slate-500">// Clean, scalable Laravel code</div>
+                                <div class="mt-2">
+                                    <span class="text-purple-400">class</span>
+                                    <span class="text-yellow-300">UserController</span>
+                                </div>
+                                <div class="text-slate-500">{</div>
+                                <div class="pl-4">
+                                    <span class="text-purple-400">public function</span>
+                                    <span class="text-blue-400">store</span>
+                                    <span class="text-slate-400">(Request $request)</span>
+                                </div>
+                                <div class="pl-4 text-slate-500">{</div>
+                                <div class="pl-8">
+                                    <span class="text-purple-400">return</span>
+                                    <span class="text-yellow-300">User</span>
+                                    <span class="text-slate-400">::</span>
+                                    <span class="text-blue-400">create</span>
+                                    <span class="text-slate-400">(</span>
+                                </div>
+                                <div class="pl-12 text-slate-400">$request->validated()</div>
+                                <div class="pl-8 text-slate-400">);</div>
+                                <div class="pl-4 text-slate-500">}</div>
+                                <div class="text-slate-500">}</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating badge -->
+                        <div
+                            class="absolute -bottom-4 -left-4 bg-accent-500 text-navy-900 font-bold px-4 py-2 rounded-xl shadow-lg float-shape">
+                            Laravel 11
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-xs text-slate-500 uppercase tracking-widest">Scroll</span>
+            <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
         </div>
     </section>
 
@@ -497,10 +681,24 @@
                 </div>
 
                 <div class="text-center mb-12 fade-up">
-                    <a href="mailto:elbasiriothman@gmail.com"
-                        class="btn-primary inline-block bg-accent-500 hover:bg-accent-600 text-navy-900 font-semibold px-8 py-4 rounded-lg text-lg">
-                        elbasiriothman@gmail.com
-                    </a>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="mailto:elbasiriothman@gmail.com"
+                            class="btn-primary inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-navy-900 font-semibold px-8 py-4 rounded-lg text-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            elbasiriothman@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/elbasiri" target="_blank" rel="noopener noreferrer"
+                            class="btn-secondary inline-flex items-center gap-2 border-2 border-slate-600 hover:border-accent-500/50 text-white font-semibold px-8 py-4 rounded-lg text-lg">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Contact Form -->
@@ -538,15 +736,39 @@
          FOOTER
     ═══════════════════════════════════════════════════════════════ -->
     <footer class="py-12 bg-navy-950 border-t border-slate-800">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex items-center justify-center gap-3 mb-4">
-                <div class="w-8 h-8 bg-accent-500 rounded-lg flex items-center justify-center">
-                    <span class="text-navy-900 font-bold">E</span>
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <img src="./Elbasiri tech.png" alt="Elbasiri Tech" class="w-20">
                 </div>
-                <span class="text-lg font-bold">Elbasiri <span class="text-accent-500">Tech</span></span>
+
+                <!-- Tagline -->
+                <p class="text-slate-500 text-center">Backend systems that power your business growth.</p>
+
+                <!-- Social links -->
+                <div class="flex items-center gap-4">
+                    <a href="mailto:elbasiriothman@gmail.com" class="social-icon text-slate-400 hover:text-accent-500"
+                        aria-label="Email">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/elbasiri" target="_blank" rel="noopener noreferrer"
+                        class="social-icon text-slate-400 hover:text-accent-500" aria-label="LinkedIn">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <p class="text-slate-500 mb-6">Backend systems that power your business growth.</p>
-            <p class="text-slate-600 text-sm">&copy; 2026 Elbasiri Tech. All rights reserved.</p>
+
+            <!-- Copyright -->
+            <div class="mt-8 pt-6 border-t border-slate-800 text-center">
+                <p class="text-slate-600 text-sm">&copy; 2026 Elbasiri Tech. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
